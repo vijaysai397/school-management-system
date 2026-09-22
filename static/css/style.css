@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+    --ink: #19323c;
+    --muted: #6a7b7d;
+    --paper: #f7f8f3;
+    --white: #ffffff;
+    --teal: #0f6b68;
+    --teal-dark: #0b4f50;
+    --coral: #e56f5d;
+    --line: #dbe4df;
+    --error: #a53e35;
+    --success: #216b4e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.page-shell {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
+}
+
+.brand-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8vw;
+    color: var(--white);
+    background: var(--teal);
+    background-image: linear-gradient(145deg, rgba(15, 107, 104, 0.96), rgba(7, 68, 70, 0.98)), url('data:image/svg+xml,%3Csvg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 90C35 55 65 125 120 70V120H0Z" fill="%23e56f5d" fill-opacity=".18"/%3E%3C/svg%3E');
+}
+
+.school-logo {
+    display: block;
+    width: min(190px, 58vw);
+    height: 142px;
+    margin-bottom: 42px;
+    object-fit: cover;
+    object-position: center;
+    border: 3px solid rgba(255, 255, 255, 0.72);
+    border-radius: 50%;
+}
+
+.eyebrow {
+    margin: 0 0 16px;
+    color: var(--coral);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.brand-panel .eyebrow {
+    color: #f5bd91;
+}
+
+h1,
+h2 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.08;
+}
+
+h1 {
+    max-width: 500px;
+    font-size: clamp(2.8rem, 5vw, 5.2rem);
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+.brand-copy {
+    max-width: 360px;
+    margin: 26px 0 0;
+    color: rgba(255, 255, 255, 0.74);
+    line-height: 1.7;
+}
+
+.form-panel {
+    display: grid;
+    padding: 48px;
+    place-items: center;
+    background: var(--white);
+}
+
+.form-card {
+    width: min(100%, 430px);
+}
+
+.form-intro {
+    margin: 14px 0 30px;
+    color: var(--muted);
+}
+
+form {
+    display: grid;
+    gap: 9px;
+}
+
+label {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--ink);
+    background: #fbfcfa;
+    font: inherit;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(15, 107, 104, 0.12);
+}
+
+.button {
+    display: inline-block;
+    width: 100%;
+    margin-top: 18px;
+    padding: 15px 20px;
+    border: 0;
+    border-radius: 5px;
+    color: var(--white);
+    background: var(--teal);
+    font: inherit;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 160ms ease, transform 160ms ease;
+}
+
+.button:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+}
+
+.form-footer {
+    margin: 26px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+a {
+    color: var(--teal);
+    font-weight: 700;
+}
+
+.flash {
+    margin-bottom: 22px;
+    padding: 12px 14px;
+    border-left: 3px solid;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+.flash.error {
+    border-color: var(--error);
+    color: var(--error);
+    background: #fff1ef;
+}
+
+.flash.success {
+    border-color: var(--success);
+    color: var(--success);
+    background: #effaf3;
+}
+
+@media (max-width: 760px) {
+    .page-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .brand-panel {
+        min-height: 330px;
+        padding: 42px 28px;
+    }
+
+    .school-logo {
+        width: 142px;
+        height: 108px;
+        margin-bottom: 28px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .form-panel {
+        padding: 48px 28px 60px;
+    }
+}
