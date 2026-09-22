@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}School portal{% endblock %} | Indus Valley International School</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="portal-body">
+<header class="topbar"><a class="topbar-brand" href="{{ url_for('dashboard') }}">Indus Valley International School</a><span>{{ session.get('user_name') }} ({{ session.get('role') }})</span><a href="{{ url_for('logout') }}">Log out</a></header>
+<main class="portal-shell">
+    <nav class="portal-nav">
+        <span class="nav-label">{{ session.get('role')|title }} workspace</span>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        {% if session.get('role') == 'admin' %}
+            <span class="nav-label">Management</span><a href="{{ url_for('student_list') }}">Students</a><a href="{{ url_for('faculty_list') }}">Faculty</a><a href="{{ url_for('salary_list') }}">Salary</a><a href="{{ url_for('fee_list') }}">Fees</a>
+            <span class="nav-label">Resources</span><a href="{{ url_for('books') }}">Library</a><a href="{{ url_for('marks_list') }}">Academics</a><a href="{{ url_for('notes') }}">Notes</a>
+        {% elif session.get('role') == 'faculty' %}
+            <span class="nav-label">Teaching</span><a href="{{ url_for('student_list') }}">Students</a><a href="{{ url_for('marks_list') }}">Marks</a><a href="{{ url_for('books') }}">Library</a><a href="{{ url_for('notes') }}">Notes</a>
+        {% else %}
+            <span class="nav-label">My learning</span><a href="{{ url_for('books') }}">Library</a><a href="{{ url_for('notes') }}">Study notes</a>
+        {% endif %}
+    </nav>
+    <section class="portal-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}
+        {% block content %}{% endblock %}
+    </section>
+</main>
+</body>
+</html>
