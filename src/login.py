@@ -11,7 +11,7 @@ def login():
 
         connection = get_database_connection()
         user = connection.execute(
-            "SELECT id, name, password FROM users "
+            "SELECT id, name, email, role, password FROM users "
             "WHERE username = ? OR email = ?",
             (username, username.lower()),
         ).fetchone()
@@ -21,6 +21,8 @@ def login():
             session.clear()
             session["user_id"] = user["id"]
             session["user_name"] = user["name"]
+            session["user_email"] = user["email"]
+            session["role"] = user["role"]
             return redirect(url_for("home"))
 
         flash("Invalid username/email or password.", "error")

@@ -13,8 +13,9 @@ def signup():
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
         confirm_password = request.form.get("confirm_password", "")
+        role = request.form.get("role", "student")
 
-        if not all([name, email, username, password, confirm_password]):
+        if not all([name, email, username, password, confirm_password]) or role not in {"admin", "faculty", "student"}:
             flash("Please fill in every field.", "error")
             return render_template("signup.html")
 
@@ -35,14 +36,15 @@ def signup():
 
         connection.execute(
             """
-            INSERT INTO users (name, email, username, password, created_at)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO users (name, email, username, password, role, created_at)
+            VALUES (?, ?, ?, ?, ?, ?)
             """,
             (
                 name,
                 email,
                 username,
                 generate_password_hash(password),
+                role,
                 datetime.utcnow().isoformat(),
             ),
         )
