@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up | Indus Valley International School</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="brand-panel">
+            <img class="school-logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Indus Valley International School logo">
+            <p class="eyebrow">Indus Valley International School</p>
+            <h1>Your school community, together.</h1>
+            <p class="brand-copy">Create your portal account to access a more connected school experience.</p>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-card">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <p class="eyebrow">School portal</p>
+                <h2>Create your account</h2>
+                <p class="form-intro">Use your details to get started.</p>
+                <form method="post" id="signup-form" novalidate>
+                    <label for="name">Full name</label>
+                    <input id="name" name="name" type="text" autocomplete="name" required>
+
+                    <label for="email">Email address</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required>
+
+                    <label for="username">Username</label>
+                    <input id="username" name="username" type="text" autocomplete="username" required>
+
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+
+                    <label for="confirm_password">Confirm password</label>
+                    <input id="confirm_password" name="confirm_password" type="password" minlength="8" autocomplete="new-password" required>
+
+                    <button class="button" type="submit">Create account</button>
+                </form>
+                <p class="form-footer">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

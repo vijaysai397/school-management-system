@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Indus Valley International School</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="brand-panel">
+            <img class="school-logo" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Indus Valley International School logo">
+            <p class="eyebrow">Indus Valley International School</p>
+            <h1>Learning begins with belonging.</h1>
+            <p class="brand-copy">A simple, secure place for our school community to stay connected.</p>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-card">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                {% if logged_in %}
+                    <p class="eyebrow">Welcome back</p>
+                    <h2>Hello, {{ session.get('user_name') }}.</h2>
+                    <p class="form-intro">You are signed in to the school management system.</p>
+                    <a class="button" href="{{ url_for('logout') }}">Log out</a>
+                {% else %}
+                    <p class="eyebrow">School portal</p>
+                    <h2>Welcome back</h2>
+                    <p class="form-intro">Sign in to continue to your account.</p>
+                    <form method="post" novalidate>
+                        <label for="username">Username or email</label>
+                        <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+
+                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+                        <button class="button" type="submit">Sign in</button>
+                    </form>
+                    <p class="form-footer">New to the portal? <a href="{{ url_for('signup') }}">Create an account</a></p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
